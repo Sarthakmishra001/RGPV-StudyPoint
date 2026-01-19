@@ -21,14 +21,19 @@ interface AuthState {
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Check for user in localStorage
+    // Check for user and token in localStorage
     const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem('token');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+    if (storedToken) {
+      setToken(storedToken);
     }
     setLoading(false);
   }, []);
@@ -43,6 +48,7 @@ export function useAuth() {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       setUser(user);
+      setToken(token);
       router.push('/dashboard');
     } catch (error) {
       throw error;
@@ -63,6 +69,7 @@ export function useAuth() {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       setUser(user);
+      setToken(token);
       router.push('/dashboard');
     } catch (error) {
       throw error;
@@ -71,6 +78,7 @@ export function useAuth() {
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     router.push('/');
@@ -78,6 +86,7 @@ export function useAuth() {
 
   return {
     user,
+    token,
     loading,
     login,
     register,

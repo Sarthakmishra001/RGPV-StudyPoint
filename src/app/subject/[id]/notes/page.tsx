@@ -31,9 +31,9 @@ export default function SubjectNotesPage({ params }: { params: { id: string } })
             Semester {subject.semester}
           </Link>
           <span>/</span>
-          <span className="text-gray-900">{subject.subject}</span>
+          <span className="text-gray-900">{subject.name}</span>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900">{subject.subject}</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{subject.name}</h1>
         <p className="text-gray-600 mt-1">{subject.code}</p>
       </div>
 

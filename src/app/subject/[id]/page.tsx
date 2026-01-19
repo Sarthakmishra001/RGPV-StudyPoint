@@ -115,25 +115,24 @@ export default function SubjectPage() {
             {activeTab === 'notes' && (
               <div className="space-y-6">
                 {subject.chapters.map((chapter) => (
-                  <div key={chapter.id} className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="text-lg font-medium text-gray-900">{chapter.name}</h3>
+                  <div key={chapter.number} className="bg-gray-50 rounded-lg p-4">
+                    <h3 className="text-lg font-medium text-gray-900">Chapter {chapter.number}: {chapter.title}</h3>
                     <div className="mt-2 space-y-2">
-                      {chapter.topics.map((topic) => (
-                        <div key={topic.id} className="flex items-center justify-between bg-white p-3 rounded-md">
+                      {chapter.topics.map((topic, index) => (
+                        <div key={index} className="flex items-center justify-between bg-white p-3 rounded-md">
                           <div className="flex-1">
-                            <span className="text-sm text-gray-600">{topic.name}</span>
-                            {topic.description && (
-                              <p className="text-xs text-gray-500 mt-1">{topic.description}</p>
-                            )}
+                            <span className="text-sm text-gray-600">{topic}</span>
                           </div>
-                          <a
-                            href={topic.driveLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="ml-4 text-sm text-[#2563EB] hover:text-blue-700 font-medium"
-                          >
-                            View Notes
-                          </a>
+                          {chapter.driveLinks[0] && (
+                            <a
+                              href={chapter.driveLinks[0]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="ml-4 text-sm text-[#2563EB] hover:text-blue-700 font-medium"
+                            >
+                              View Notes
+                            </a>
+                          )}
                         </div>
                       ))}
                     </div>
